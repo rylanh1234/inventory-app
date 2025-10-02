@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { getPokemons } = require('../controllers/indexController');
+const { getPokemonData } = require('../controllers/indexController');
 
 const indexRouter = Router();
 
-indexRouter.get("/", getPokemons);
+indexRouter.get("/", getPokemonData);
 
 module.exports = indexRouter;

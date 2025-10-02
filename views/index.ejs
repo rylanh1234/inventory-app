@@ -8,12 +8,32 @@
 </head>
 
 <body>
+    <h1>Trainers</h1>
+    <ul>
+        <% trainers.map((trainer)=> { %>
+            <li>
+                <p>
+                    <%= trainer.name %>
+                </p>
+            </li>
+            <% }) %>
+    </ul>
     <h1>Pokémons</h1>
     <ul>
         <% pokemons.map((pokemon)=> { %>
             <li>
                 <p>
                     <%= pokemon.name %>
+                </p>
+            </li>
+            <% }) %>
+    </ul>
+    <h1>Types</h1>
+    <ul>
+        <% types.map((type)=> { %>
+            <li>
+                <p>
+                    <%= type.name %>
                 </p>
             </li>
             <% }) %>

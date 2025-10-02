@@ -5,6 +5,18 @@ async function getAllPokemons() {
     return rows;
 }
 
+async function getAllTrainers() {
+    const { rows } = await pool.query("SELECT * FROM trainers");
+    return rows;
+}
+
+async function getAllTypes() {
+    const { rows } = await pool.query("SELECT * FROM types");
+    return rows;
+}
+
 module.exports = {
-    getAllPokemons
+    getAllPokemons,
+    getAllTrainers,
+    getAllTypes
 };
