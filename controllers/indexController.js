@@ -7,7 +7,7 @@ async function getPokemons(req, res) {
         return;
     }
 
-    res.send("Pokemon Names: " + pokemons.map(pokemon => pokemon.name).join(", "));
+    res.render("index", {pokemons: pokemons});
 };
 
 module.exports = { getPokemons };
