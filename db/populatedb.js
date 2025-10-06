@@ -4,9 +4,9 @@ require("dotenv").config();
 const { Client } = require("pg");
 
 const SQL = `
-DROP TABLE IF EXISTS trainers;
-DROP TABLE IF EXISTS pokemons;
-DROP TABLE IF EXISTS types;
+DROP TABLE IF EXISTS trainers CASCADE;
+DROP TABLE IF EXISTS pokemons CASCADE;
+DROP TABLE IF EXISTS types CASCADE;
 DROP TABLE IF EXISTS pokemon_type;
 
 CREATE TABLE IF NOT EXISTS trainers (
@@ -27,10 +27,10 @@ CREATE TABLE IF NOT EXISTS pokemons (
     trainer_id INTEGER REFERENCES trainers(trainer_id) ON DELETE SET NULL
 );
 
-INSERT INTO pokemons (name)
+INSERT INTO pokemons (name, trainer_id)
 VALUES
-    ('Pikachu'),
-    ('Charmander');
+    ('Pikachu', 1),
+    ('Charmander', 2);
 
 
 
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS types (
 
 INSERT INTO types (name)
 VALUES
+    ('Electric'),
     ('Fire'),
     ('Water');
 
@@ -52,6 +53,10 @@ CREATE TABLE IF NOT EXISTS pokemon_type (
     type_id INTEGER REFERENCES types(type_id) ON DELETE CASCADE,
     PRIMARY KEY (pokemon_id, type_id)
 );
+
+INSERT INTO pokemon_type (pokemon_id, type_id)
+VALUES
+    (1, 1);
 `;
 
 async function main() {

@@ -32,11 +32,23 @@ async function getTypeByID(typeID) {
     return rows;
 }
 
+async function getTrainerPokemons(trainerID) {
+    const { rows } = await pool.query("SELECT * FROM pokemons WHERE trainer_id = $1", [trainerID]);
+    return rows;
+}
+
+async function getPokemonType(pokemonName) {
+    const { rows } = await pool.query("SELECT t.name FROM types t JOIN pokemon_type pt ON t.type_id = pt.type_id JOIN pokemons p ON pt.pokemon_id = p.pokemon_id WHERE p.name = $1", [pokemonName]);
+    return rows;
+}
+
 module.exports = {
     getAllPokemons,
     getAllTrainers,
     getAllTypes,
     getPokemonByID,
     getTrainerByID,
-    getTypeByID
+    getTypeByID,
+    getTrainerPokemons,
+    getPokemonType
 };

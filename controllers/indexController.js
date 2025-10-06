@@ -30,7 +30,12 @@ async function getPokemonByID(req, res) {
         res.status(404).send("Pokemon not found");
         return;
     }
-    res.render("pokemon-details", { pokemon: pokemon[0] });
+    let pokemonTrainer = await db.getTrainerByID(pokemon[0].trainer_id);
+    if (!pokemonTrainer.length) { // if pokemon has no trainer
+        pokemonTrainer = [{ name: "No Trainer" }]
+    }
+    const pokemonType = await db.getPokemonType(pokemon[0].name);
+    res.render("pokemon-details", { pokemon: pokemon[0], trainer: pokemonTrainer[0] , type: pokemonType[0] });
 };
 
 async function getTrainerByID(req, res) {
