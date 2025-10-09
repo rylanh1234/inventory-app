@@ -32,10 +32,10 @@ async function getPokemonByID(req, res) {
     }
     let pokemonTrainer = await db.getTrainerByID(pokemon[0].trainer_id);
     if (!pokemonTrainer.length) { // if pokemon has no trainer
-        pokemonTrainer = [{ name: "No Trainer" }]
+        pokemonTrainer = [{ name: "No Trainer" }];
     }
-    const pokemonType = await db.getPokemonType(pokemon[0].name);
-    res.render("pokemon-details", { pokemon: pokemon[0], trainer: pokemonTrainer[0] , type: pokemonType[0] });
+    const pokemonTypes = await db.getPokemonType(pokemon[0].name);
+    res.render("pokemon-details", { pokemon: pokemon[0], trainer: pokemonTrainer[0] , types: pokemonTypes });
 };
 
 async function getTrainerByID(req, res) {
@@ -45,7 +45,8 @@ async function getTrainerByID(req, res) {
         res.status(404).send("Trainer not found");
         return;
     }
-    res.render("trainer-details", { trainer: trainer[0] });
+    const pokemons = await db.getTrainerPokemons(Number(trainerID));
+    res.render("trainer-details", { trainer: trainer[0], pokemons: pokemons });
 };
 
 async function getTypeByID(req, res) {
@@ -55,7 +56,8 @@ async function getTypeByID(req, res) {
         res.status(404).send("Type not found");
         return;
     }
-    res.render("type-details", { type: type[0] });
+    const pokemons = await db.getPokemonOfType(type[0].name);
+    res.render("type-details", { type: type[0], pokemons: pokemons });
 };
 
 module.exports = { getPokemonData, getPokemonByID, getTrainerByID, getTypeByID };

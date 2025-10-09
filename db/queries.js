@@ -42,6 +42,11 @@ async function getPokemonType(pokemonName) {
     return rows;
 }
 
+async function getPokemonOfType(type) {
+    const { rows } = await pool.query("SELECT p.name FROM pokemons p JOIN pokemon_type pt ON p.pokemon_id = pt.type_id JOIN types t ON pt.pokemon_id = t.type_id WHERE t.name = $1", [type]);
+    return rows;
+}
+
 module.exports = {
     getAllPokemons,
     getAllTrainers,
@@ -50,5 +55,6 @@ module.exports = {
     getTrainerByID,
     getTypeByID,
     getTrainerPokemons,
-    getPokemonType
+    getPokemonType,
+    getPokemonOfType
 };

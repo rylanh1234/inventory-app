@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Management</title>
 </head>
+
 <body>
-    <h1>Fire Types</h1>
-    <ul></ul>
+    <h1>
+        <%= type.name %> Types
+    </h1>
+    <ul>
+        <% pokemons.map((pokemon)=> { %>
+            <li>
+                <p>
+                    <%= pokemon.name %>
+                </p>
+            </li>
+            <% }) %>
+    </ul>
 </body>
+
 </html>
