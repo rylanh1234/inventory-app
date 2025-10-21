@@ -13,7 +13,7 @@
         <% trainers.map((trainer)=> { %>
             <li>
                 <p>
-                    <%= trainer.name %>
+                    <a href="/trainers/<%= trainer.trainer_id %>"><%= trainer.name %></a>
                 </p>
             </li>
             <% }) %>
@@ -23,7 +23,7 @@
         <% pokemons.map((pokemon)=> { %>
             <li>
                 <p>
-                    <%= pokemon.name %>
+                    <a href="/pokemons/<%= pokemon.pokemon_id %>"><%= pokemon.name %></a>
                 </p>
             </li>
             <% }) %>
@@ -33,7 +33,7 @@
         <% types.map((type)=> { %>
             <li>
                 <p>
-                    <%= type.name %>
+                    <a href="/types/<%= type.type_id %>"><%= type.name %></a>
                 </p>
             </li>
             <% }) %>

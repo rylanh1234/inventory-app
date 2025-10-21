@@ -7,8 +7,8 @@
 </head>
 <body>
     <p>Name: <%= trainer.name %></p>
-    <p>Pokemons: 
-        <ul>
+    <p>Pokemons: </p>
+    <ul>
         <% pokemons.map((pokemon)=> { %>
             <li>
                 <p>
@@ -16,7 +16,7 @@
                 </p>
             </li>
             <% }) %>
-        </ul>
-    </p>
+    </ul>
+    <a href="/">Go Back</a>
 </body>
 </html>
