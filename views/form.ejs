@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Management</title>
+</head>
+<body>
+    <% if (item === "trainer") { %>
+        <form method="POST" action="/new/trainer">
+            <h1>New Trainer</h1>
+            <div class="inputContainer">
+                <div class="formGroup">
+                    <label for="trainerName">Name</label>
+                    <input type="text" id="trainerName" name="trainerName" required>
+                </div>
+                <div class="formGroup">
+                    <label for="pokemons">Pokemons</label>
+                    <input type="text" id="pokemons" name="pokemons">
+                </div>
+            </div>
+            <button type="submit">Add Trainer</button>
+        </form>
+    <% } else if (item === "pokemon") { %>
+        <form method="POST" action="/new/pokemon">
+            <h1>New Pokemon</h1>
+            <div class="inputContainer">
+                <div class="formGroup">
+                    <label for="pokemonName">Name</label>
+                    <input type="text" id="pokemonName" name="pokemonName" required>
+                </div>
+                <div class="formGroup">
+                    <label for="trainer">Trainer</label>
+                    <input type="text" id="trainer" name="trainer">
+                </div>
+                <div class="formGroup">
+                    <label for="type">Type(s)</label>
+                    <input type="radio" id="type" name="type" required>
+                </div>
+            </div>
+            <button type="submit">Add Pokemon</button>
+        </form>
+    <% } %>
+</body>
+</html>
