@@ -7,7 +7,7 @@ async function createItemGet(req, res) {
 
 async function createItemPost(req, res) {
     const item = req.body;
-    // await db.insertItem(item);
+    await db.insertItem(item);
     res.redirect("/");
 }
 

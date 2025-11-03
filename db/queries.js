@@ -47,6 +47,15 @@ async function getPokemonOfType(type) {
     return rows;
 }
 
+async function insertItem(item) {
+    if (item.trainerName) {
+        await pool.query("INSERT INTO trainers (name) VALUES($1)", [item.trainerName]);
+    }
+    else if (item.pokemonName) {
+        await pool.query("INSERT INTO pokemons (name) VALUES($1)", [item.pokemonName]);
+    }
+}
+
 module.exports = {
     getAllPokemons,
     getAllTrainers,
@@ -56,5 +65,6 @@ module.exports = {
     getTypeByID,
     getTrainerPokemons,
     getPokemonType,
-    getPokemonOfType
+    getPokemonOfType,
+    insertItem
 };
