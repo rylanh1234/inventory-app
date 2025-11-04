@@ -52,7 +52,12 @@ async function insertItem(item) {
         await pool.query("INSERT INTO trainers (name) VALUES($1)", [item.trainerName]);
     }
     else if (item.pokemonName) {
-        await pool.query("INSERT INTO pokemons (name) VALUES($1)", [item.pokemonName]);
+        // insert the new pokemon and returns its id
+        const { rows } = await pool.query("INSERT INTO pokemons (name) VALUES($1) RETURNING pokemon_id", [item.pokemonName]);
+        // relate each type to the new pokemon
+        for (type of item.type) {
+            await pool.query("INSERT INTO pokemon_type (pokemon_id, type_id) VALUES ($1, $2)", [rows[0].pokemon_id, type]);
+        }
     }
 }
 

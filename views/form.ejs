@@ -34,12 +34,82 @@
                     <input type="text" id="trainer" name="trainer">
                 </div>
                 <div class="formGroup">
-                    <label for="type">Type(s)</label>
-                    <input type="radio" id="type" name="type" required>
+                    <fieldset>
+                        <legend for="type">Type(s)</legend>
+                        <div>
+                            <input type="checkbox" id="typeNormal" name="type" value="1">
+                            <label for="typeNormal">Normal</label>
+
+                            <input type="checkbox" id="typeFire" name="type" value="2">
+                            <label for="typeFire">Fire</label>
+                            
+                            <input type="checkbox" id="typeWater" name="type" value="3">
+                            <label for="typeWater">Water</label>
+                            
+                            <input type="checkbox" id="typeElectric" name="type" value="4">
+                            <label for="typeElectric">Electric</label>
+                            
+                            <input type="checkbox" id="typeGrass" name="type" value="5">
+                            <label for="typeGrass">Grass</label>
+                            
+                            <input type="checkbox" id="typeIce" name="type" value="6">
+                            <label for="typeIce">Ice</label>
+                            
+                            <input type="checkbox" id="typeFighting" name="type" value="7">
+                            <label for="typeFighting">Fighting</label>
+                            
+                            <input type="checkbox" id="typePoison" name="type" value="8">
+                            <label for="typePoison">Poison</label>
+                            
+                            <input type="checkbox" id="typeGround" name="type" value="9">
+                            <label for="typeGround">Ground</label>
+                            
+                            <input type="checkbox" id="typeFlying" name="type" value="10">
+                            <label for="typeFlying">Flying</label>
+                            
+                            <input type="checkbox" id="typePsychic" name="type" value="11">
+                            <label for="typePsychic">Psychic</label>
+                            
+                            <input type="checkbox" id="typeBug" name="type" value="12">
+                            <label for="typeBug">Bug</label>
+                            
+                            <input type="checkbox" id="typeRock" name="type" value="13">
+                            <label for="typeRock">Rock</label>
+                            
+                            <input type="checkbox" id="typeGhost" name="type" value="14">
+                            <label for="typeGhost">Ghost</label>
+                            
+                            <input type="checkbox" id="typeDragon" name="type" value="15">
+                            <label for="typeDragon">Dragon</label>
+                        </div>
+                    </fieldset>
                 </div>
             </div>
             <button type="submit">Add Pokemon</button>
         </form>
+
+        
+        <script>
+            // type is required, but ensure only a maximum of 2 types checked
+            const submitBtn = document.querySelector('button[type="submit"]');
+            const checkboxes = document.querySelectorAll('input[name="type"]');
+            submitBtn.addEventListener('click', (e) => {
+                const checked = document.querySelectorAll('input[name="type"]:checked');
+                    if (checked.length === 0) {
+                        e.preventDefault();
+                    }
+            });
+            checkboxes.forEach(box => {
+                box.addEventListener('change', () => {
+                    const checked = document.querySelectorAll('input[name="type"]:checked');
+                    if (checked.length > 2) {
+                        box.checked = false; // uncheck the 3rd box
+                    }
+                });
+            });
+        </script>
+
+
     <% } %>
 </body>
 </html>

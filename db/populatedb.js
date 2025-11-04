@@ -42,9 +42,21 @@ CREATE TABLE IF NOT EXISTS types (
 
 INSERT INTO types (name)
 VALUES
-    ('Electric'),
+    ('Normal'),
     ('Fire'),
-    ('Water');
+    ('Water'),
+    ('Electric'),
+    ('Grass'),
+    ('Ice'),
+    ('Fighting'),
+    ('Poison'),
+    ('Ground'),
+    ('Flying'),
+    ('Psychic'),
+    ('Bug'),
+    ('Rock'),
+    ('Ghost'),
+    ('Dragon');
 
 
 
@@ -56,7 +68,8 @@ CREATE TABLE IF NOT EXISTS pokemon_type (
 
 INSERT INTO pokemon_type (pokemon_id, type_id)
 VALUES
-    (1, 1);
+    (1, 4),
+    (2, 2);
 `;
 
 async function main() {
