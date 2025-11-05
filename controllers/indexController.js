@@ -34,7 +34,7 @@ async function getPokemonByID(req, res) {
     if (!pokemonTrainer.length) { // if pokemon has no trainer
         pokemonTrainer = [{ name: "No Trainer" }];
     }
-    const pokemonTypes = await db.getPokemonType(pokemon[0].name);
+    const pokemonTypes = await db.getPokemonType(pokemon[0].pokemon_id);
     res.render("pokemon-details", { pokemon: pokemon[0], trainer: pokemonTrainer[0] , types: pokemonTypes });
 };
 

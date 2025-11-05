@@ -37,13 +37,13 @@ async function getTrainerPokemons(trainerID) {
     return rows;
 }
 
-async function getPokemonType(pokemonName) {
-    const { rows } = await pool.query("SELECT t.name FROM types t JOIN pokemon_type pt ON t.type_id = pt.type_id JOIN pokemons p ON pt.pokemon_id = p.pokemon_id WHERE p.name = $1", [pokemonName]);
+async function getPokemonType(pokemonID) {
+    const { rows } = await pool.query("SELECT t.name FROM types t JOIN pokemon_type pt ON t.type_id = pt.type_id JOIN pokemons p ON pt.pokemon_id = p.pokemon_id WHERE p.pokemon_id = $1", [pokemonID]);
     return rows;
 }
 
 async function getPokemonOfType(type) {
-    const { rows } = await pool.query("SELECT p.name FROM pokemons p JOIN pokemon_type pt ON p.pokemon_id = pt.type_id JOIN types t ON pt.pokemon_id = t.type_id WHERE t.name = $1", [type]);
+    const { rows } = await pool.query("SELECT p.name FROM pokemons p JOIN pokemon_type pt ON p.pokemon_id = pt.pokemon_id JOIN types t ON pt.type_id = t.type_id WHERE t.name = $1", [type]);
     return rows;
 }
 
@@ -55,7 +55,9 @@ async function insertItem(item) {
         // insert the new pokemon and returns its id
         const { rows } = await pool.query("INSERT INTO pokemons (name) VALUES($1) RETURNING pokemon_id", [item.pokemonName]);
         // relate each type to the new pokemon
-        for (type of item.type) {
+        // checks if item.type is array (two types), if not, wraps the one type in one instead of iterating over a string
+        const typeIterable = Array.isArray(item.type) ? item.type : [item.type];
+        for (const type of typeIterable) {
             await pool.query("INSERT INTO pokemon_type (pokemon_id, type_id) VALUES ($1, $2)", [rows[0].pokemon_id, type]);
         }
     }
