@@ -52,8 +52,14 @@ async function insertItem(item) {
         await pool.query("INSERT INTO trainers (name) VALUES($1)", [item.trainerName]);
     }
     else if (item.pokemonName) {
+        const result = await pool.query("SELECT trainer_id FROM trainers WHERE name = $1", [item.trainer]);
+        let trainer_id = result.rows[0] ? result.rows[0].trainer_id : null;
+        if (item.trainer && !trainer_id) {
+            const newTrainerID = await pool.query("INSERT INTO trainers (name) VALUES ($1) RETURNING trainer_id", [item.trainer]);
+            trainer_id = newTrainerID.rows[0].trainer_id;
+        } 
         // insert the new pokemon and returns its id
-        const { rows } = await pool.query("INSERT INTO pokemons (name) VALUES($1) RETURNING pokemon_id", [item.pokemonName]);
+        const { rows } = await pool.query("INSERT INTO pokemons (name, trainer_id) VALUES($1, $2) RETURNING pokemon_id", [item.pokemonName, trainer_id]);
         // relate each type to the new pokemon
         // checks if item.type is array (two types), if not, wraps the one type in one instead of iterating over a string
         const typeIterable = Array.isArray(item.type) ? item.type : [item.type];
