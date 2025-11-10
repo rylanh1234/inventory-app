@@ -69,6 +69,15 @@ async function insertItem(item) {
     }
 }
 
+async function deleteItem(item, id) {
+    if (item === "trainer") {
+        await pool.query("DELETE FROM trainers WHERE trainer_id = $1", [id]);
+    }
+    if (item === "pokemon") {
+        await pool.query("DELETE FROM pokemons WHERE pokemon_id = $1", [id]);
+    }
+}
+
 module.exports = {
     getAllPokemons,
     getAllTrainers,
@@ -79,5 +88,6 @@ module.exports = {
     getTrainerPokemons,
     getPokemonType,
     getPokemonOfType,
-    insertItem
+    insertItem,
+    deleteItem
 };

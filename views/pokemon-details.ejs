@@ -22,6 +22,9 @@
             </li>
             <% }) %>
     </ul>
+    <form method="POST" action="/delete/pokemon/<%= pokemon.pokemon_id %>">
+        <button type="submit" id="deleteItemBtn">Delete Pokemon</button>
+    </form>
     <a href="/">Go Back</a>
 </body>
 

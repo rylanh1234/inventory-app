@@ -17,6 +17,9 @@
             </li>
             <% }) %>
     </ul>
+    <form method="POST" action="/delete/trainer/<%= trainer.trainer_id %>">
+        <button type="submit" id="deleteItemBtn">Delete Trainer</button>
+    </form>
     <a href="/">Go Back</a>
 </body>
 </html>
